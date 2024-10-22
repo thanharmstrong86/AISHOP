@@ -1,0 +1,9 @@
+{
+    "name": "aishop-monorepo",
+    "private": true,
+    "workspaces": [
+      "shop-frontend",
+      "shop-backend"
+    ]
+  }
+  
