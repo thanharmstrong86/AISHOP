@@ -1,9 +1,16 @@
 {
-    "name": "aishop-monorepo",
-    "private": true,
-    "workspaces": [
-      "shop-frontend",
-      "shop-backend"
-    ]
+  "name": "aishop",
+  "private": true,
+  "workspaces": [
+    "shop-frontend",
+    "shop-backend"
+  ],
+  "scripts": {
+    "start:frontend": "npm --prefix shop-frontend start",
+    "start:backend": "npm --prefix shop-backend start",
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\""
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
   }
-  
+}

@@ -4,9 +4,11 @@ function App() {
   const [products, setProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);  // State for showing the modal
   const [newProduct, setNewProduct] = useState({ name: '', price: ''});
+  const [imageUploading, setImageUploading] = useState(false);
+
   useEffect(() => {
     // Fetch products from the backend
-    fetch('http://localhost:5001/api/products')
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/products`)
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
@@ -14,9 +16,31 @@ function App() {
       .catch((error) => console.error('Error fetching products:', error));
   }, []);
 
-  const openModal = () => setShowModal(true);    // Function to show modal
+  const openModal = () => setShowModal(true);    // Fun ction to show modal
   const closeModal = () => setShowModal(false);   // Function to hide modal
-
+  const handleImageUpload = async (event) => {
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'thanhnham'); // replace with your Cloudinary upload preset
+    formData.append('cloud_name', 'thanhnham'); // replace with your Cloudinary cloud name
+  
+    setImageUploading(true);
+  
+    try {
+      const response = await fetch(`https://api.cloudinary.com/v1_1/thanhnham/image/upload`, {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await response.json();
+      setNewProduct((prev) => ({ ...prev, imageUrl: data.secure_url }));
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    } finally {
+      setImageUploading(false);
+    }
+  };
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNewProduct({ ...newProduct, [name]: value });
@@ -26,7 +50,7 @@ function App() {
     e.preventDefault();
 
     // Send POST request to the backend to create a new product
-    const response = await fetch('http://localhost:5001/api/products', {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/products`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -121,6 +145,15 @@ function App() {
                   placeholder="Enter product price"
                 />
               </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Upload Image</label>
+                <input
+                  type="file"
+                  onChange={handleImageUpload}
+                  className="w-full px-4 py-2 border rounded-md text-gray-800 focus:outline-none focus:border-yellow-500"
+                />
+                {imageUploading && <p className="text-gray-500">Uploading image...</p>}
+              </div>
               <div className="flex justify-end space-x-4">
                 <button
                   type="button"
@@ -132,6 +165,7 @@ function App() {
                 <button
                   type="submit"
                   className="bg-yellow-500 text-white py-2 px-4 rounded-md hover:bg-yellow-600"
+                  disabled={imageUploading}
                 >
                   Save
                 </button>
