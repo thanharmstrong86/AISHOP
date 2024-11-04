@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/AISHOP/static/css/main.34576e44.css",
-    "main.js": "/AISHOP/static/js/main.102186c9.js",
+    "main.js": "/AISHOP/static/js/main.84defdb7.js",
     "static/js/453.4ffcc917.chunk.js": "/AISHOP/static/js/453.4ffcc917.chunk.js",
     "index.html": "/AISHOP/index.html",
     "main.34576e44.css.map": "/AISHOP/static/css/main.34576e44.css.map",
-    "main.102186c9.js.map": "/AISHOP/static/js/main.102186c9.js.map",
+    "main.84defdb7.js.map": "/AISHOP/static/js/main.84defdb7.js.map",
     "453.4ffcc917.chunk.js.map": "/AISHOP/static/js/453.4ffcc917.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.34576e44.css",
-    "static/js/main.102186c9.js"
+    "static/js/main.84defdb7.js"
   ]
 }
