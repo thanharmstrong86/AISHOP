@@ -1,184 +1,80 @@
 import React, { useEffect, useState } from 'react';
+import { Route, Routes, Link } from 'react-router-dom';
+import Home from './pages/Home';
+import About from './pages/About';
 
 function App() {
   const [products, setProducts] = useState([]);
-  const [showModal, setShowModal] = useState(false);  // State for showing the modal
-  const [newProduct, setNewProduct] = useState({ name: '', price: ''});
-  const [imageUploading, setImageUploading] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    // Fetch products from the backend
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/products`)
-      .then((response) => response.json())
-      .then((data) => {
-        setProducts(data);
-      })
-      .catch((error) => console.error('Error fetching products:', error));
-  }, []);
-
-  const openModal = () => setShowModal(true);    // Fun ction to show modal
-  const closeModal = () => setShowModal(false);   // Function to hide modal
-  const handleImageUpload = async (event) => {
-    const file = event.target.files[0];
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', 'thanhnham'); // replace with your Cloudinary upload preset
-    formData.append('cloud_name', 'thanhnham'); // replace with your Cloudinary cloud name
+    const fetchCategoriesAndProducts = async () => {
+      try {
+        const [categoryResponse, productResponse] = await Promise.all([
+          fetch(`${process.env.REACT_APP_BACKEND_URL}/api/categories`),
+          fetch(`${process.env.REACT_APP_BACKEND_URL}/api/products`)
+        ]);
   
-    setImageUploading(true);
+        // Handle categories data
+        let categoriesData = await categoryResponse.json();
+        categoriesData = [{ name: 'All' }, ...categoriesData]; // Add "All" to the beginning
+        setCategories(categoriesData);
   
-    try {
-      const response = await fetch(`https://api.cloudinary.com/v1_1/thanhnham/image/upload`, {
-        method: 'POST',
-        body: formData,
-      });
-      const data = await response.json();
-      setNewProduct((prev) => ({ ...prev, imageUrl: data.secure_url }));
-    } catch (error) {
-      console.error('Error uploading image:', error);
-    } finally {
-      setImageUploading(false);
-    }
-  };
+        // Handle products data
+        const productsData = await productResponse.json();
+        setProducts(productsData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
   
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewProduct({ ...newProduct, [name]: value });
-  };
+    fetchCategoriesAndProducts();
+  }, []);  
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    // Send POST request to the backend to create a new product
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/products`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newProduct),
-    });
-
-    if (response.ok) {
-      const createdProduct = await response.json();
-      setProducts([...products, createdProduct]); // Add the new product to the existing list
-      closeModal(); // Close the modal after submission
-    } else {
-      console.error('Error creating product');
-    }
-  };
+  const filteredProducts = products.filter((product) => {
+    const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
+    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   return (
-    
     <div className="min-h-screen bg-white">
       <header className="py-6 shadow-md">
-        <h1 className="text-center text-4xl font-bold tracking-wide text-gray-800">
-          Our Exclusive Products
-        </h1>
+        <h1 className="text-center text-4xl font-bold tracking-wide text-gray-800">Our Exclusive Products</h1>
       </header>
-
-      {/* Breadcrumb section */}
-      <div className="container mx-auto mt-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-        <div className="flex space-x-4 text-gray-600">
-          <span className="cursor-pointer text-yellow-500">All</span>
-        </div>
-        {/* New "Breadcrumb-style" button */}
-        <div className="flex space-x-4 text-gray-600">
-          <span 
-            className="cursor-pointer text-gray-500 hover:text-yellow-500 transition"
-            onClick={openModal}
-          >
-            New
-          </span>
-        </div>
+      
+      {/* Breadcrumb Navigation */}
+      <div className="container mx-auto mt-6 px-4 sm:px-6 lg:px-8 text-gray-600">
+        <nav className="flex">
+          <Link to="/" className="text-gray-500 hover:text-yellow-500">Home</Link>
+          <span className="mx-2 text-gray-400">/</span>
+          <Link to="/about" className="text-gray-500 hover:text-yellow-500">About Us</Link>
+        </nav>
       </div>
 
-      <main className="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        {/* Grid Container */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
-            <div key={product._id} className="group relative bg-white shadow-sm rounded-lg overflow-hidden">
-              <div className="w-full h-64 bg-gray-100 overflow-hidden">
-                <img
-                  src={product.imageUrl}
-                  alt={product.name}
-                  className="w-full h-full object-center object-cover transition-transform transform group-hover:scale-105"
-                />
-              </div>
-              <div className="pt-4">
-                <h3 className="text-lg font-medium text-gray-900">
-                  {product.name}
-                </h3>
-                <p className="mt-1 text-sm text-gray-500">
-                  ${product.price.toFixed(2)}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </main>
-
-      {/* Modal for adding new product */}
-      {showModal && (
-        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
-            <h2 className="text-2xl font-semibold text-gray-700 mb-4">Add New Product</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label className="block text-gray-700">Product Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={newProduct.name}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-md text-gray-800 focus:outline-none focus:border-yellow-500"
-                  placeholder="Enter product name"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700">Price</label>
-                <input
-                  type="number"
-                  name="price"
-                  value={newProduct.price}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-md text-gray-800 focus:outline-none focus:border-yellow-500"
-                  placeholder="Enter product price"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700">Upload Image</label>
-                <input
-                  type="file"
-                  onChange={handleImageUpload}
-                  className="w-full px-4 py-2 border rounded-md text-gray-800 focus:outline-none focus:border-yellow-500"
-                />
-                {imageUploading && <p className="text-gray-500">Uploading image...</p>}
-              </div>
-              <div className="flex justify-end space-x-4">
-                <button
-                  type="button"
-                  onClick={closeModal}
-                  className="bg-gray-400 text-white py-2 px-4 rounded-md hover:bg-gray-500"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="bg-yellow-500 text-white py-2 px-4 rounded-md hover:bg-yellow-600"
-                  disabled={imageUploading}
-                >
-                  Save
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+      {/* Routing for Pages */}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              products={products}
+              filteredProducts={filteredProducts}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+              categories={categories}
+            />
+          }
+        />
+        <Route path="/about" element={<About />} />
+      </Routes>
 
       <footer className="bg-gray-900 text-white py-6">
-        <p className="text-center text-sm">
-          © 2024 My Shop. All rights reserved.
-        </p>
+        <p className="text-center text-sm">© 2024 My Shop. All rights reserved.</p>
       </footer>
     </div>
   );
