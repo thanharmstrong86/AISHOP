@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/AISHOP/static/css/main.49088587.css",
-    "main.js": "/AISHOP/static/js/main.a2cd7529.js",
+    "main.css": "/AISHOP/static/css/main.2d74ff41.css",
+    "main.js": "/AISHOP/static/js/main.7c3f9d6b.js",
     "static/js/453.4ffcc917.chunk.js": "/AISHOP/static/js/453.4ffcc917.chunk.js",
     "index.html": "/AISHOP/index.html",
-    "main.49088587.css.map": "/AISHOP/static/css/main.49088587.css.map",
-    "main.a2cd7529.js.map": "/AISHOP/static/js/main.a2cd7529.js.map",
+    "main.2d74ff41.css.map": "/AISHOP/static/css/main.2d74ff41.css.map",
+    "main.7c3f9d6b.js.map": "/AISHOP/static/js/main.7c3f9d6b.js.map",
     "453.4ffcc917.chunk.js.map": "/AISHOP/static/js/453.4ffcc917.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.49088587.css",
-    "static/js/main.a2cd7529.js"
+    "static/css/main.2d74ff41.css",
+    "static/js/main.7c3f9d6b.js"
   ]
 }
