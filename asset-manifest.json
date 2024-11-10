@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/AISHOP/static/css/main.2d74ff41.css",
-    "main.js": "/AISHOP/static/js/main.7c3f9d6b.js",
-    "static/js/453.4ffcc917.chunk.js": "/AISHOP/static/js/453.4ffcc917.chunk.js",
-    "index.html": "/AISHOP/index.html",
-    "main.2d74ff41.css.map": "/AISHOP/static/css/main.2d74ff41.css.map",
-    "main.7c3f9d6b.js.map": "/AISHOP/static/js/main.7c3f9d6b.js.map",
-    "453.4ffcc917.chunk.js.map": "/AISHOP/static/js/453.4ffcc917.chunk.js.map"
+    "main.css": "/static/css/main.3793afc3.css",
+    "main.js": "/static/js/main.c519336d.js",
+    "static/js/453.4ffcc917.chunk.js": "/static/js/453.4ffcc917.chunk.js",
+    "index.html": "/index.html",
+    "main.3793afc3.css.map": "/static/css/main.3793afc3.css.map",
+    "main.c519336d.js.map": "/static/js/main.c519336d.js.map",
+    "453.4ffcc917.chunk.js.map": "/static/js/453.4ffcc917.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2d74ff41.css",
-    "static/js/main.7c3f9d6b.js"
+    "static/css/main.3793afc3.css",
+    "static/js/main.c519336d.js"
   ]
 }
