@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.3793afc3.css",
-    "main.js": "/static/js/main.c519336d.js",
-    "static/js/453.4ffcc917.chunk.js": "/static/js/453.4ffcc917.chunk.js",
-    "index.html": "/index.html",
-    "main.3793afc3.css.map": "/static/css/main.3793afc3.css.map",
-    "main.c519336d.js.map": "/static/js/main.c519336d.js.map",
-    "453.4ffcc917.chunk.js.map": "/static/js/453.4ffcc917.chunk.js.map"
+    "main.css": "https://thanharmstrong86.github.io/AISHOP/static/css/main.3793afc3.css",
+    "main.js": "https://thanharmstrong86.github.io/AISHOP/static/js/main.84266579.js",
+    "static/js/453.4ffcc917.chunk.js": "https://thanharmstrong86.github.io/AISHOP/static/js/453.4ffcc917.chunk.js",
+    "index.html": "https://thanharmstrong86.github.io/AISHOP/index.html",
+    "main.3793afc3.css.map": "https://thanharmstrong86.github.io/AISHOP/static/css/main.3793afc3.css.map",
+    "main.84266579.js.map": "https://thanharmstrong86.github.io/AISHOP/static/js/main.84266579.js.map",
+    "453.4ffcc917.chunk.js.map": "https://thanharmstrong86.github.io/AISHOP/static/js/453.4ffcc917.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3793afc3.css",
-    "static/js/main.c519336d.js"
+    "static/js/main.84266579.js"
   ]
 }
