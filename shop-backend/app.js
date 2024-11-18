@@ -7,7 +7,7 @@ const productRoutes = require('./routes/productRoutes'); // Import product route
 const categoryRoutes = require('./routes/categoryRoutes'); 
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://thanharmstrong86.github.io'], // GitHub Pages URL
+  origin: ['http://localhost:3000', 'http://localhost:3001', 'https://thanharmstrong86.github.io'], // GitHub Pages URL
   optionsSuccessStatus: 200 // For legacy browser support
 };
 

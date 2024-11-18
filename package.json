@@ -2,13 +2,14 @@
   "name": "aishop",
   "private": true,
   "workspaces": [
-    "shop-frontend",
+    "packages/*",
     "shop-backend"
   ],
   "scripts": {
-    "start:frontend": "npm --prefix shop-frontend start",
+    "start:frontend": "npm --prefix packages/shop-frontend start",
+    "start:admin": "npm --prefix packages/admin-panel start",
     "start:backend": "npm --prefix shop-backend start",
-    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\""
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:admin\" \"npm run start:backend\""
   },
   "devDependencies": {
     "concurrently": "^7.6.0"
