@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { HashRouter } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-
+import { CartProvider } from './context/CartContext';
 // Type-safe root element
 const rootElement = document.getElementById("root") as HTMLElement;
 
@@ -13,9 +13,11 @@ const rootElement = document.getElementById("root") as HTMLElement;
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
-    <HashRouter>
-      <App />
-    </HashRouter>
+    <CartProvider>
+      <HashRouter>
+        <App />
+      </HashRouter>
+    </CartProvider>
   </React.StrictMode>
 );
 

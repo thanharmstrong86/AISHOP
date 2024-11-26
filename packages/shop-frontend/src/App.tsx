@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import Home from './pages/Home';
 import About from './pages/About';
 import { Product } from './models/Product';
+import Navbar from "./component/Navbar";
+import CartPage from './pages/Cart'; 
+import OrderHistoryPage from './pages/OrderHistoryPage';
 
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -42,8 +45,13 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white">
-      <header className="py-6 shadow-md">
-        <h1 className="text-center text-4xl font-bold tracking-wide text-gray-800">Our Exclusive Products</h1>
+      <header className="bg-white shadow-md">
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+          <Link to="/" className="text-2xl font-bold tracking-tight text-gray-800 hover:text-yellow-500 transition">
+            AI Shop
+          </Link>
+          <Navbar />
+        </div>
       </header>
       
       {/* Breadcrumb Navigation */}
@@ -72,6 +80,8 @@ function App() {
           }
         />
         <Route path="/about" element={<About />} />
+        <Route path="/cart" element={<CartPage />} /> {/* Add the /cart route */}
+        <Route path="/cart-history" element={<OrderHistoryPage />} />
       </Routes>
 
       <footer className="bg-gray-900 text-white py-6">

@@ -20,6 +20,16 @@
             Products
           </Link>
         </li>
+        <li>
+          <Link to="/orders" className="block py-2 px-4 hover:bg-gray-700">
+            Orders
+          </Link>
+        </li>
+        <li>
+          <Link to="/about-management" className="block py-2 px-4 hover:bg-gray-700">
+            About Page
+          </Link>
+        </li>
       </ul>
     </div>
   );
