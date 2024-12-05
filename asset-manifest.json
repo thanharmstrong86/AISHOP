@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/AISHOP/admin-panel/static/css/main.b8be3fd1.css",
-    "main.js": "/AISHOP/admin-panel/static/js/main.f20fde92.js",
-    "static/js/400.662b1119.chunk.js": "/AISHOP/admin-panel/static/js/400.662b1119.chunk.js",
-    "static/media/fa-solid-900.ttf": "/AISHOP/admin-panel/static/media/fa-solid-900.ad1782c70927ebc5bc87.ttf",
-    "static/media/fa-brands-400.ttf": "/AISHOP/admin-panel/static/media/fa-brands-400.26b80c8830bebf340211.ttf",
-    "static/media/fa-solid-900.woff2": "/AISHOP/admin-panel/static/media/fa-solid-900.83a538a018a9e44b023a.woff2",
-    "static/media/fa-brands-400.woff2": "/AISHOP/admin-panel/static/media/fa-brands-400.fdbb558523a380307689.woff2",
-    "static/media/fa-regular-400.ttf": "/AISHOP/admin-panel/static/media/fa-regular-400.05fdd87be89f7f8f0a1e.ttf",
-    "static/media/fa-regular-400.woff2": "/AISHOP/admin-panel/static/media/fa-regular-400.4f6a2dabee9c092d09b9.woff2",
-    "static/media/fa-v4compatibility.ttf": "/AISHOP/admin-panel/static/media/fa-v4compatibility.fa86b3c85e77abbd2ebd.ttf",
-    "static/media/fa-v4compatibility.woff2": "/AISHOP/admin-panel/static/media/fa-v4compatibility.c3ea317a0f10f201597f.woff2",
-    "index.html": "/AISHOP/admin-panel/index.html",
-    "main.b8be3fd1.css.map": "/AISHOP/admin-panel/static/css/main.b8be3fd1.css.map",
-    "main.f20fde92.js.map": "/AISHOP/admin-panel/static/js/main.f20fde92.js.map",
-    "400.662b1119.chunk.js.map": "/AISHOP/admin-panel/static/js/400.662b1119.chunk.js.map"
+    "main.css": "/AISHOP/shop-frontend/static/css/main.3d5eae79.css",
+    "main.js": "/AISHOP/shop-frontend/static/js/main.d8e48573.js",
+    "static/js/400.14a37375.chunk.js": "/AISHOP/shop-frontend/static/js/400.14a37375.chunk.js",
+    "static/media/fa-solid-900.ttf": "/AISHOP/shop-frontend/static/media/fa-solid-900.ad1782c70927ebc5bc87.ttf",
+    "static/media/fa-brands-400.ttf": "/AISHOP/shop-frontend/static/media/fa-brands-400.26b80c8830bebf340211.ttf",
+    "static/media/fa-solid-900.woff2": "/AISHOP/shop-frontend/static/media/fa-solid-900.83a538a018a9e44b023a.woff2",
+    "static/media/fa-brands-400.woff2": "/AISHOP/shop-frontend/static/media/fa-brands-400.fdbb558523a380307689.woff2",
+    "static/media/fa-regular-400.ttf": "/AISHOP/shop-frontend/static/media/fa-regular-400.05fdd87be89f7f8f0a1e.ttf",
+    "static/media/fa-regular-400.woff2": "/AISHOP/shop-frontend/static/media/fa-regular-400.4f6a2dabee9c092d09b9.woff2",
+    "static/media/fa-v4compatibility.ttf": "/AISHOP/shop-frontend/static/media/fa-v4compatibility.fa86b3c85e77abbd2ebd.ttf",
+    "static/media/fa-v4compatibility.woff2": "/AISHOP/shop-frontend/static/media/fa-v4compatibility.c3ea317a0f10f201597f.woff2",
+    "index.html": "/AISHOP/shop-frontend/index.html",
+    "main.3d5eae79.css.map": "/AISHOP/shop-frontend/static/css/main.3d5eae79.css.map",
+    "main.d8e48573.js.map": "/AISHOP/shop-frontend/static/js/main.d8e48573.js.map",
+    "400.14a37375.chunk.js.map": "/AISHOP/shop-frontend/static/js/400.14a37375.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b8be3fd1.css",
-    "static/js/main.f20fde92.js"
+    "static/css/main.3d5eae79.css",
+    "static/js/main.d8e48573.js"
   ]
 }
