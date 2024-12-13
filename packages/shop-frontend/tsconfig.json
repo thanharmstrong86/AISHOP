@@ -11,7 +11,7 @@
     "baseUrl": "./",
     "paths": {
       "*": ["src/*"]
-    },
+    }
   },
   "include": ["src/**/*", "../admin-panel/src/pages/Home-bk.js"],
   "exclude": ["node_modules"]

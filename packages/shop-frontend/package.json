@@ -1,7 +1,7 @@
 {
   "name": "shop-frontend",
   "version": "0.1.0",
-  "homepage": "https://thanharmstrong86.github.io/AISHOP",
+  "homepage": "https://thanharmstrong86.github.io/shop-frontend",
   "private": true,
   "dependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
@@ -15,18 +15,19 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-helmet": "^6.1.0",
-    "react-scripts": "5.0.1",
-    "typescript": "^5.6.3",
-    "web-vitals": "^2.1.4",
     "react-router-dom": "^6.4.1",
-    "tailwindcss": "^3.3.1"
+    "react-scripts": "5.0.1",
+    "react-toastify": "^11.0.0",
+    "tailwindcss": "^3.3.1",
+    "typescript": "^5.6.3",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build:prod",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
@@ -49,10 +50,10 @@
   },
   "devDependencies": {
     "@types/react-helmet": "^6.1.11",
+    "@types/react-router-dom": "^5.3.3",
     "autoprefixer": "^10.4.20",
     "gh-pages": "^6.2.0",
     "postcss": "^8.4.47",
-    "tailwindcss": "^3.4.14",
-     "@types/react-router-dom": "^5.3.3"
+    "tailwindcss": "^3.4.14"
   }
 }

@@ -9,7 +9,10 @@
     "start:frontend": "npm --prefix packages/shop-frontend start",
     "start:admin": "npm --prefix packages/admin-panel start",
     "start:backend": "npm --prefix shop-backend start",
-    "start": "concurrently \"npm run start:frontend\" \"npm run start:admin\" \"npm run start:backend\""
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:admin\" \"npm run start:backend\"",
+    "deploy:frontend": "cd packages/shop-frontend && npm run build && cd build && git init && git remote add origin git@github.com:thanharmstrong86/shop-frontend.git && git add . && git commit -m 'Deploy shop-frontend' && git branch -M main && git push -f origin main",
+    "deploy:admin": "cd packages/admin-panel && npm run build && cd build && git init && git remote add origin git@github.com:thanharmstrong86/admin-panel.git && git add . && git commit -m 'Deploy admin-panel' && git branch -M main && git push -f origin main",
+    "deploy": "npm run deploy:frontend && npm run deploy:admin"
   },
   "devDependencies": {
     "concurrently": "^7.6.0"

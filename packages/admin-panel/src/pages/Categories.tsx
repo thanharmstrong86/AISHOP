@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Category } from '../models/Category';
+import axios from "axios";
 
 const Categories: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]); // List of categories
@@ -89,25 +90,31 @@ const Categories: React.FC = () => {
   };
   
   const handleDelete = async (categoryId: string) => {
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/api/categories/${categoryId}`,
-        { method: "DELETE" }
-      );
-      if (!response.ok) {
-        throw new Error("Failed to delete category");
-      }
+    const confirmDelete = window.confirm("Are you sure you want to delete this category?");
+    if (!confirmDelete) return; // Exit if the user cancels
   
-      // Remove the deleted category from state
+    try {
+      // Send DELETE request using Axios
+      await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/categories/${categoryId}`);
+  
+      // Remove the deleted category from the state
       setCategories((prevCategories) =>
         prevCategories.filter((category) => category._id !== categoryId)
       );
+  
       alert("Category deleted successfully!");
-    } catch (error) {
+    } catch (error: any) {
+      // Log the error for debugging
       console.error("Error deleting category:", error);
-      alert("An error occurred while deleting the category.");
+  
+      // Handle specific backend error messages
+      if (error.response && error.response.data && error.response.data.error) {
+        alert(error.response.data.error); // Show the specific backend error message
+      } else {
+        alert("An error occurred while deleting the category."); // Generic fallback message
+      }
     }
-  };  
+  };
 
   const handleUpdate = (category: Category) => {
     setNewCategory(category);
@@ -145,14 +152,16 @@ const Categories: React.FC = () => {
                 <button
                   onClick={() => handleUpdate(category)}
                   className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600"
-                >
-                  Update
+                  title="Update"
+                  >
+                  <i className="fas fa-pen"></i>
                 </button>
                 <button
                   onClick={() => handleDelete(category._id!)}
                   className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600"
-                >
-                  Delete
+                  title="Delete"
+                  >
+                  <i className="fas fa-trash"></i>
                 </button>
               </td>
             </tr>

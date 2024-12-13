@@ -9,7 +9,7 @@ export interface CartItem {
 
 interface CartContextType {
   cart: CartItem[];
-  addToCart: (product: Omit<CartItem, 'quantity'>) => void;
+  addToCart: (product: Omit<CartItem, 'quantity'>, quantity?: number) => void;
   removeFromCart: (productId: string) => void;
   clearCart: () => void; // Add clearCart function
 }
@@ -23,17 +23,17 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  const addToCart = (product: Omit<CartItem, 'quantity'>) => {
+  const addToCart = (product: Omit<CartItem, 'quantity'>, quantity: number = 1) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.productId === product.productId);
       if (existingItem) {
         return prevCart.map((item) =>
           item.productId === product.productId
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, quantity: item.quantity + quantity } // Add the passed quantity
             : item
         );
       }
-      return [...prevCart, { ...product, quantity: 1 }];
+      return [...prevCart, { ...product, quantity }]; // Use the passed quantity
     });
   };
 

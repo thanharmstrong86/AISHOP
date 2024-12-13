@@ -6,6 +6,8 @@ import { Product } from './models/Product';
 import Navbar from "./component/Navbar";
 import CartPage from './pages/Cart'; 
 import OrderHistoryPage from './pages/OrderHistoryPage';
+import { ToastContainer } from 'react-toastify';
+import ProductDetail from './pages/ProductDetail';
 
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -79,6 +81,7 @@ function App() {
             />
           }
         />
+        <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/about" element={<About />} />
         <Route path="/cart" element={<CartPage />} /> {/* Add the /cart route */}
         <Route path="/cart-history" element={<OrderHistoryPage />} />
@@ -87,6 +90,7 @@ function App() {
       <footer className="bg-gray-900 text-white py-6">
         <p className="text-center text-sm">© 2024 My Shop. All rights reserved.</p>
       </footer>
+      <ToastContainer position="top-center" autoClose={3000} />
     </div>
   );
 }

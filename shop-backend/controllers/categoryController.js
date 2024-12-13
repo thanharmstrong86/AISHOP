@@ -1,5 +1,5 @@
 const Category = require('../models/Category');
-
+const Product = require('../models/Product');
 // Get all categories
 exports.getCategories = async (req, res) => {
   try {
@@ -64,12 +64,24 @@ exports.deleteCategory = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const deletedCategory = await Category.findByIdAndDelete(id);
-
-    if (!deletedCategory) {
+    // Step 1: Find the category to get its name
+    const category = await Category.findById(id);
+    if (!category) {
       console.error('Category not found for deletion:', id);
       return res.status(404).json({ error: 'Category not found' });
     }
+
+    // Step 2: Check if any product is using this category name
+    const categoryInUse = await Product.findOne({ category: category.name });
+    if (categoryInUse) {
+      console.error(`Category "${category.name}" is being used by a product.`);
+      return res.status(400).json({
+        error: `Category "${category.name}" cannot be deleted because it is in use by a product.`,
+      });
+    }
+
+    // Step 3: If not in use, proceed to delete the category
+    const deletedCategory = await Category.findByIdAndDelete(id);
 
     console.log('Category deleted successfully:', deletedCategory);
     res.json({ message: 'Category deleted successfully', deletedCategory });

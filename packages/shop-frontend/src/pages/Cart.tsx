@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
+import { useNavigate } from 'react-router-dom'; 
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CartPage: React.FC = () => {
   const { cart, removeFromCart, clearCart } = useCart();
   const [shippingDetails, setShippingDetails] = useState({ address: '', phone: '' });
   const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate(); // For navigation
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -17,12 +22,12 @@ const CartPage: React.FC = () => {
 
     try {
       if (!shippingDetails.address || !shippingDetails.phone) {
-        alert("Please provide complete shipping details.");
+        toast.error("Please provide complete shipping details.");
         return;
       }
 
       if (cart.length === 0) {
-        alert("Your cart is empty.");
+        toast.error("Your cart is empty.");
         return;
       }
 
@@ -44,13 +49,18 @@ const CartPage: React.FC = () => {
       // Send order to the backend
       const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/orders`, orderData);
 
-      alert("Order placed successfully!");
-
       // Clear the cart after successful order placement
       clearCart();
 
       // Optionally reset shipping details
       setShippingDetails({ address: '', phone: '' });
+
+      toast.success("Order placed successfully! Redirecting to the homepage...");
+
+      // Navigate to the homepage after a short delay
+      setTimeout(() => {
+        navigate("/"); // Redirect to homepage
+      }, 2000); // 2 seconds delay for better UX
     } catch (error) {
       console.error("Error placing order:", error);
       alert("An error occurred while placing your order. Please try again.");
@@ -65,7 +75,9 @@ const CartPage: React.FC = () => {
       {cart.length === 0 ? (
         <div className="text-center">
           <p className="text-gray-600 text-lg mb-4">Your cart is empty.</p>
-          <a href="/" className="text-blue-500 underline">Continue Shopping</a>
+          <Link to="/" className="text-blue-500 underline">
+            ← Continue Shopping
+          </Link>
         </div>
       ) : (
         <div>
@@ -132,7 +144,9 @@ const CartPage: React.FC = () => {
 
           {/* Back to Home Link */}
           <div className="mt-6 text-center">
-            <a href="/" className="text-blue-500 underline">← Continue Shopping</a>
+            <Link to="/" className="text-blue-500 underline">
+              ← Continue Shopping
+            </Link>
           </div>
         </div>
       )}
