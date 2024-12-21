@@ -1,30 +1,56 @@
-// src/pages/About.js
-import React, { useState } from 'react';
-import emailjs from 'emailjs-com';
-import { Helmet } from 'react-helmet';
+import React, { useEffect, useState } from "react";
+import emailjs from "emailjs-com";
+import { Helmet } from "react-helmet";
+import axios from 'axios';
 
-function About() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
+
+const About: React.FC = () => {
+  const [formData, setFormData] = useState<FormData>({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState(null);
+  const [status, setStatus] = useState<string | null>(null);
+  const [aboutContent, setAboutContent] = useState<string>(''); // State for About content
 
-  const handleChange = (e) => {
+  useEffect(() => {
+    // Fetch About content from backend
+    const fetchAboutContent = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/about`);
+        setAboutContent(response.data?.content || ''); // Set the fetched content
+      } catch (error) {
+        console.error('Error fetching About content:', error);
+      }
+    };
+
+    fetchAboutContent();
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      // Replace 'YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', and 'YOUR_USER_ID' with your EmailJS credentials
-      await emailjs.send('service_htqof7f', 'template_nz306gg', formData, '9HLnTFbBktjmjeULK');
-      setStatus('Message sent successfully!');
-      setFormData({ name: '', email: '', message: '' });
+      // Convert formData to a Record<string, unknown>
+      const templateParams: Record<string, unknown> = {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+      };
+      await emailjs.send("service_htqof7f", "template_nz306gg", templateParams, "9HLnTFbBktjmjeULK");
+      setStatus("Message sent successfully!");
+      setFormData({ name: "", email: "", message: "" });
     } catch (error) {
-      console.error('Error sending message:', error);
-      setStatus('Failed to send message. Please try again later.');
+      console.error("Error sending message:", error);
+      setStatus("Failed to send message. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -32,58 +58,27 @@ function About() {
 
   return (
     <div className="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        {/* Helmet for SEO */}
       <Helmet>
         <title>About Us | AI Shop</title>
         <meta name="description" content="Learn more about our 40+ years of experience in providing premium coffee, tea, and groceries." />
         <meta name="keywords" content="AI Shop, coffee, tea, groceries, about us, contact" />
       </Helmet>
-      
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-800 mb-4">About Us</h1>
-        <p className="text-lg text-gray-600">
-          Bringing you over 40 years of experience in premium coffee, tea, and fine groceries.
-        </p>
+        <p className="text-lg text-gray-600">Bringing you over 40 years of experience in premium coffee, tea, and fine groceries.</p>
       </div>
 
-      {/* About Information */}
-      <div className="flex flex-col md:flex-row items-center md:space-x-12 space-y-8 md:space-y-0">
-        <div className="md:w-1/2">
-          <img
-            src="https://via.placeholder.com/600x400"
-            alt="Our Shop"
-            className="rounded-lg shadow-lg object-cover"
-          />
-        </div>
-        <div className="md:w-1/2 space-y-6">
-          <h2 className="text-2xl font-semibold text-gray-700">Our Story</h2>
-          <p className="text-gray-600 leading-relaxed">
-            Quán Liên Phong has been a cornerstone of quality, offering a curated selection of coffee, tea, and grocery items for over four decades. Our shop is a place where tradition meets quality, and customers can find products sourced with care and expertise.
-          </p>
-          <p className="text-gray-600 leading-relaxed">
-            Located in the heart of TPHCM, we have built a legacy of trust and excellence, serving our local community with passion and dedication.
-          </p>
-        </div>
-      </div>
-
-      {/* Contact Information */}
-      <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div className="text-center">
-          <h3 className="text-xl font-semibold text-gray-700">Address</h3>
-          <p className="text-gray-600">158 Nguyễn Tiểu La, Phường 5, Quận 10, TPHCM</p>
-        </div>
-        <div className="text-center">
-          <h3 className="text-xl font-semibold text-gray-700">Contact Person</h3>
-          <p className="text-gray-600">Cô Liên</p>
-        </div>
-        <div className="text-center">
-          <h3 className="text-xl font-semibold text-gray-700">Email</h3>
-          <p className="text-gray-600">nhamchithanh@gmail.com</p>
-        </div>
-        <div className="text-center">
-          <h3 className="text-xl font-semibold text-gray-700">Phone</h3>
-          <p className="text-gray-600">38 562762</p>
-        </div>
+      {/* Form and content here */}
+      {/* Dynamic About Content */}
+      <div className="mb-12">
+        {aboutContent ? (
+          <div
+            className="prose max-w-none" // Tailwind Prose styling for rich content
+            dangerouslySetInnerHTML={{ __html: aboutContent }}
+          ></div>
+        ) : (
+          <p className="text-gray-600">Loading about content...</p>
+        )}
       </div>
 
       {/* Contact Form */}
@@ -137,6 +132,6 @@ function About() {
       </div>
     </div>
   );
-}
+};
 
 export default About;

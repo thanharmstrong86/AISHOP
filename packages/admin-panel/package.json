@@ -1,29 +1,33 @@
 {
-  "name": "shop-frontend",
+  "name": "admin-panel",
   "version": "0.1.0",
-  "homepage": "https://thanharmstrong86.github.io/AISHOP",
+  "homepage": "https://thanharmstrong86.github.io/admin-panel",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
-    "@tailwindcss/aspect-ratio": "^0.4.2",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "emailjs-com": "^3.2.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.119",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "axios": "^1.7.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-helmet": "^6.1.0",
+    "react-quill": "^2.0.0",
     "react-router-dom": "^6.28.0",
     "react-scripts": "5.0.1",
+    "react-toastify": "^11.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build:prod",
-    "deploy": "gh-pages -d build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build -b gh-pages -r https://github.com/thanharmstrong86/AISHOP.git -m \"Deploy amin-panel\""
   },
   "eslintConfig": {
     "extends": [
@@ -44,9 +48,7 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.20",
-    "gh-pages": "^6.2.0",
-    "postcss": "^8.4.47",
-    "tailwindcss": "^3.4.14"
+    "@types/react-router-dom": "^5.3.3",
+    "typescript": "^5.7.2"
   }
 }

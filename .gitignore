@@ -1,3 +1,8 @@
 node_modules/
 shop-backend/node_modules/
-shop-frontend/node_modules/
+packages/shop-frontend/node_modules/
+material-dashboard-master/
+packages/admin-panel/node_modules/
+# Ignore build directories
+packages/admin-panel/build/
+packages/shop-frontend/build/
