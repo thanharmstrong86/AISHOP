@@ -9,7 +9,7 @@ const orderRoutes = require('./routes/orderRoutes');
 const aboutRoutes = require('./routes/aboutRoutes');
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'http://localhost:3001', 'https://thanharmstrong86.github.io'], // GitHub Pages URL
+  origin: ['http://localhost:3000', 'http://localhost:3001', 'https://thanharmstrong86.github.io', 'https://hamonvil.com', 'https://admin.hamonvil.com'], // GitHub Pages URL
   optionsSuccessStatus: 200 // For legacy browser support
 };
 

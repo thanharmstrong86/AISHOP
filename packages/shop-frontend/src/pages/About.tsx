@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import emailjs from "emailjs-com";
 import { Helmet } from "react-helmet";
 import axios from 'axios';
+import { PAGE_TITLES } from "../constants/constants";
 
 interface FormData {
   name: string;
@@ -59,7 +60,7 @@ const About: React.FC = () => {
   return (
     <div className="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
       <Helmet>
-        <title>About Us | AI Shop</title>
+        <title>{PAGE_TITLES.HOME}</title>
         <meta name="description" content="Learn more about our 40+ years of experience in providing premium coffee, tea, and groceries." />
         <meta name="keywords" content="AI Shop, coffee, tea, groceries, about us, contact" />
       </Helmet>
@@ -82,7 +83,7 @@ const About: React.FC = () => {
       </div>
 
       {/* Contact Form */}
-      <div className="mt-16">
+      {/* <div className="mt-16">
         <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">Contact Us</h2>
         <p className="text-center text-gray-600 mb-8">Have a question or need help? Send us a message, and we’ll get back to you soon.</p>
         <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white shadow-md rounded-lg p-6">
@@ -129,7 +130,7 @@ const About: React.FC = () => {
           </div>
           {status && <p className="mt-4 text-center text-gray-600">{status}</p>}
         </form>
-      </div>
+      </div> */}
     </div>
   );
 };

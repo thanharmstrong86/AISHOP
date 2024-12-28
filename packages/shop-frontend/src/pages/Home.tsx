@@ -2,8 +2,8 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { Product } from '../models/Product';
 import { Category } from '../models/Category';
-import { useCart } from '../context/CartContext';
 import { Link } from "react-router-dom";
+import { PAGE_TITLES } from "../constants/constants";
 interface HomeProps {
   products: Product[];
   filteredProducts: Product[];
@@ -23,11 +23,10 @@ const Home: React.FC<HomeProps> = ({
   setSearchQuery,
   categories,
 }) => {
-  const { addToCart } = useCart();
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-        <title>Home | AI Shop</title>
+        <title>{PAGE_TITLES.HOME}</title>
         <meta name="description" content="Explore our exclusive collection of coffee, tea, food, and beauty products." />
         <meta name="keywords" content="AI Shop, coffee, tea, food, beauty products, shop online" />
       </Helmet>

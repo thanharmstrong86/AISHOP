@@ -8,21 +8,21 @@ const Navbar: React.FC = () => {
   return (
     <nav className="flex space-x-6 items-center">
       {/* Cart History Link */}
-      <Link
+      {/* <Link
         to="/cart-history"
         className="text-gray-600 hover:text-yellow-500 transition text-lg"
       >
         Cart History
-      </Link>
+      </Link> */}
 
       {/* Cart Link */}
-      <Link
+      {/* <Link
         to="/cart"
         className="flex items-center text-gray-600 hover:text-yellow-500 transition text-lg"
       >
         <i className="fas fa-shopping-cart mr-2"></i>
         <span>Cart ({cart.reduce((count, item) => count + item.quantity, 0)})</span>
-      </Link>
+      </Link> */}
     </nav>
   );
 };

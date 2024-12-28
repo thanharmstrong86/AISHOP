@@ -8,6 +8,7 @@ import CartPage from './pages/Cart';
 import OrderHistoryPage from './pages/OrderHistoryPage';
 import { ToastContainer } from 'react-toastify';
 import ProductDetail from './pages/ProductDetail';
+import { FOOTER_LINKS } from './constants/constants';
 
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -50,7 +51,7 @@ function App() {
       <header className="bg-white shadow-md">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <Link to="/" className="text-2xl font-bold tracking-tight text-gray-800 hover:text-yellow-500 transition">
-            AI Shop
+          <img src={`${process.env.PUBLIC_URL}/logo.jpg`} alt="Logo" className="h-10" />
           </Link>
           <Navbar />
         </div>
@@ -87,8 +88,18 @@ function App() {
         <Route path="/cart-history" element={<OrderHistoryPage />} />
       </Routes>
 
-      <footer className="bg-gray-900 text-white py-6">
-        <p className="text-center text-sm">© 2024 My Shop. All rights reserved.</p>
+      <footer className="bg-gray-200 text-gray-700 py-6">
+        <div className="container mx-auto px-6 flex justify-between items-center">
+          <p className="text-sm">© 2024 My Shop. All rights reserved.</p>
+          <div className="flex space-x-4">
+            <a href={FOOTER_LINKS.FACEBOOK} target="_blank" rel="noopener noreferrer" className="hover:text-blue-600">
+              <i className="fab fa-facebook"></i> Facebook
+            </a>
+            <a href={FOOTER_LINKS.GOOGLE_MAPS} target="_blank" rel="noopener noreferrer" className="hover:text-blue-600">
+              <i className="fas fa-map-marker-alt"></i> Google Maps
+            </a>  
+          </div>
+        </div>
       </footer>
       <ToastContainer position="top-center" autoClose={3000} />
     </div>

@@ -25,17 +25,17 @@ const ProductDetail = () => {
   const increaseQuantity = () => setQuantity((prev) => prev + 1);
   const decreaseQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
-  const handleAddToCart = () => {
-    addToCart(
-      {
-        productId: product._id,
-        name: product.name,
-        price: product.price,
-      },
-      quantity // Pass the selected quantity
-    );
-    navigate("/"); // Redirect to homepage
-  };
+  // const handleAddToCart = () => {
+  //   addToCart(
+  //     {
+  //       productId: product._id,
+  //       name: product.name,
+  //       price: product.price,
+  //     },
+  //     quantity // Pass the selected quantity
+  //   );
+  //   navigate("/"); // Redirect to homepage
+  // };
 
   if (!product) return <p>Loading...</p>;
 
@@ -56,7 +56,7 @@ const ProductDetail = () => {
           <div dangerouslySetInnerHTML={{ __html: product.detail }}></div>
 
           {/* Quantity Selector */}
-          <div className="flex items-center mt-4">
+          {/* <div className="flex items-center mt-4">
             <button
               onClick={decreaseQuantity}
               className="px-2 py-1 bg-gray-300 rounded hover:bg-gray-400"
@@ -70,15 +70,15 @@ const ProductDetail = () => {
             >
               +
             </button>
-          </div>
+          </div> */}
 
           {/* Add to Cart */}
-          <button
+          {/* <button
             onClick={handleAddToCart}
             className="mt-6 bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
           >
             Add to Cart
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
